@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:new_prayer_app/current_time_card.dart';
 import 'package:new_prayer_app/timings_card.dart';
-import 'package:new_prayer_app/widget_animator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0XFF1E555C)),
         useMaterial3: true,
@@ -31,6 +32,7 @@ class HomeStructure extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        centerTitle: false,
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -59,58 +61,55 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-      child: ListView(
-        children: [
-          SizedBox(height: 10),
-          CurrentTimeCard(),
-          TimingsCard(),
-        ],
-      ),
-    );
-  }
-}
-
-class CurrentTimeCard extends StatelessWidget {
-  const CurrentTimeCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-        side: const BorderSide(
-          color: Colors.black12,
-          width: 1,
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                CurrentTimeCard(),
+                TimingsCard(),
+              ],
+            ),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            const Flexible(
-                fit: FlexFit.tight,
-                child: Column(
+        SliverAppBar(
+          centerTitle: false,
+          pinned: true,
+          title: Text("Newsfeed"),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              children: [
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Good Afternoon",
-                        style: TextStyle(
-                          fontSize: 25,
-                        )),
-                    Text("Still 3 hours left for Aasr to begin.")
+                    Image.asset(
+                      "assets/images/gaza.jpeg",
+                      height: 200,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                    Text(
+                      "Millions of Palestinians left homeless",
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                    ),
+                    Text(
+                      "Post oct 7 Israel had destoryed thousands of civilian buildings and killed over 80000 civilians. The aggression triggered multiple countries",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    )
                   ],
-                )),
-            Image.asset(
-              "assets/images/dhuhr.png",
-              height: 90,
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        )
+      ],
     );
   }
 }
