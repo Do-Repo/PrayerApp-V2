@@ -1,11 +1,10 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
-import 'package:new_prayer_app/widget_animator.dart';
+import 'package:new_prayer_app/structures/home_structure/screens/hijri_calendar_screen.dart';
+import 'package:new_prayer_app/widgets/widget_animator.dart';
 
 class TimingsCard extends StatefulWidget {
-  const TimingsCard({
-    super.key,
-  });
+  const TimingsCard({super.key});
 
   @override
   State<TimingsCard> createState() => _TimingsCardState();
@@ -68,10 +67,12 @@ class _TimingsCardState extends State<TimingsCard> with SingleTickerProviderStat
         children: [
           Flexible(
             child: Container(
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.onPrimary, borderRadius: BorderRadius.circular(10)),
               margin: const EdgeInsets.only(bottom: 8),
               child: ExpandablePageView(
                 controller: pageController,
+                physics: const NeverScrollableScrollPhysics(),
                 children: List.generate(
                   4,
                   (index) => Padding(
@@ -103,9 +104,14 @@ class _TimingsCardState extends State<TimingsCard> with SingleTickerProviderStat
 
   Widget dateSection(int index) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         (index == 0)
-            ? const Icon(Icons.calendar_month_outlined, size: 35)
+            ? GestureDetector(
+                onTap: () =>
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Calendar(fromHome: true))),
+                child: const Icon(Icons.calendar_month_outlined, size: 35))
             : IconButton(
                 onPressed: () async {
                   _pageController.previousPage(duration: Durations.long1, curve: Curves.easeInOut);
@@ -118,6 +124,7 @@ class _TimingsCardState extends State<TimingsCard> with SingleTickerProviderStat
         const SizedBox(width: 15),
         const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
@@ -126,7 +133,7 @@ class _TimingsCardState extends State<TimingsCard> with SingleTickerProviderStat
             ),
             Text(
               "20 Jumada al-akhirah 1443",
-              style: TextStyle(fontSize: 12, height: 0),
+              style: TextStyle(fontSize: 12),
             ),
           ],
         )
