@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_prayer_app/widgets/current_time_card.dart';
 import 'package:new_prayer_app/widgets/events_card.dart';
 import 'package:new_prayer_app/widgets/timings_card.dart';
+import 'package:new_prayer_app/widgets/widget_animator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,27 +37,54 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               },
               child: const CurrentTimeCard()),
           const SizedBox(height: 10),
-          SizedBox(
-            height: 80,
-            child: PageView(
-                controller: _pageController,
-                scrollDirection: Axis.horizontal,
-                padEnds: false,
-                children: List.generate(
-                  5,
-                  (index) => Card(
-                    elevation: 0,
-                    margin: EdgeInsets.only(left: 10, right: (index == 4) ? 10 : 0),
-                    color: Colors.white.withOpacity(0.6),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Text("Dhuhr"),
-                    ),
+          AnimatedCrossFade(
+            crossFadeState: topExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+            duration: Durations.long2,
+            secondChild: SizedBox(
+              height: 80,
+              width: double.infinity,
+              child: const Flexible(
+                fit: FlexFit.tight,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "24 - 1443",
+                        style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w700, height: 1),
+                      ),
+                      Text(
+                        "Jumada al-akhira",
+                        style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.w500),
+                      ),
+                    ],
                   ),
-                )),
+                ),
+              ),
+            ),
+            firstChild: SizedBox(
+              height: 80,
+              child: PageView(
+                  controller: _pageController,
+                  scrollDirection: Axis.horizontal,
+                  padEnds: false,
+                  children: List.generate(
+                    5,
+                    (index) => Card(
+                      elevation: 0,
+                      margin: EdgeInsets.only(left: 10, right: (index == 4) ? 10 : 0),
+                      color: Colors.white.withOpacity(0.6),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Text("Dhuhr"),
+                      ),
+                    ),
+                  )),
+            ),
           ),
           const SizedBox(height: 10),
           Flexible(
@@ -73,22 +101,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
                       children: [
-                        const Flexible(
-                          fit: FlexFit.tight,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "24 - 1443",
-                                style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w700),
-                              ),
-                              Text(
-                                "Jumada al-akhira",
-                                style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                        ),
+                        Spacer(),
                         Image.asset(
                           "assets/lunar/lunar_5.png",
                           height: 180,
