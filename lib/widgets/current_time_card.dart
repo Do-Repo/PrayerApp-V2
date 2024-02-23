@@ -9,7 +9,8 @@ class CurrentTimeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      margin: const EdgeInsets.only(top: 4, left: 4, right: 4, bottom: 1),
+      color: Colors.white.withOpacity(0.6),
+      margin: const EdgeInsets.only(top: 4, left: 10, right: 10, bottom: 1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
         // side: BorderSide(

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         sliderTheme: const SliderThemeData(showValueIndicator: ShowValueIndicator.always),
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0XFF1E555C)),
+        colorScheme: ColorScheme.fromSeed(brightness: Brightness.light, seedColor: const Color(0XFF1E555C)),
         useMaterial3: true,
       ),
       home: const HomeStructure(),
