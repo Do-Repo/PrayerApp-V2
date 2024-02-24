@@ -9,6 +9,8 @@ AppBar customAppbar(BuildContext context,
       actions: actions,
       centerTitle: false,
       titleSpacing: titleSpacing,
+      backgroundColor: Theme.of(context).primaryColor,
+      foregroundColor: Colors.white,
       bottom: (hideBorder ?? false)
           ? null
           : PreferredSize(

@@ -13,11 +13,6 @@ class CurrentTimeCard extends StatelessWidget {
       margin: const EdgeInsets.only(top: 4, left: 10, right: 10, bottom: 1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
-        // side: BorderSide(
-        //   color: Theme.of(context).primaryColor,
-        //   strokeAlign: BorderSide.strokeAlignOutside,
-        //   width: 1,
-        // ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),

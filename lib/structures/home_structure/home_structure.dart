@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_prayer_app/structures/home_structure/screens/ai_imam_screen.dart';
 import 'package:new_prayer_app/structures/home_structure/screens/hijri_calendar_screen.dart';
 import 'package:new_prayer_app/structures/home_structure/screens/home_screen.dart';
+import 'package:new_prayer_app/structures/home_structure/screens/qibla_screen.dart';
 import 'package:new_prayer_app/structures/home_structure/screens/quran_screen.dart';
 import 'package:new_prayer_app/widgets/custom_appbar.dart';
 
@@ -59,25 +60,6 @@ class _HomeStructureState extends State<HomeStructure> with SingleTickerProvider
               NavigationDestination(icon: Icon(Icons.settings_outlined), label: "Qibla"),
               NavigationDestination(icon: Icon(Icons.settings_outlined), label: "Settings"),
             ]),
-      ),
-    );
-  }
-}
-
-class QiblaScreen extends StatefulWidget {
-  const QiblaScreen({super.key});
-
-  @override
-  State<QiblaScreen> createState() => _QiblaScreenState();
-}
-
-class _QiblaScreenState extends State<QiblaScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppbar(context, title: "Qibla"),
-      body: Column(
-        children: [],
       ),
     );
   }
